@@ -35,3 +35,13 @@ class Sistema:
                 ver -= 1
             self.tiempos_procesos.append(self.entorno.now - llegada)
 
+            #Hace la simulación  del sistema con cierta cantidad de procesos y un intervalo
+def simular(cantidad_proceso, intervalo):
+    random.seed(SEED) 
+    entorno = simpy.Environment()
+    sistema = Sistema(entorno, cantidad_proceso, intervalo)
+    for i in range(cantidad_proceso):
+        entorno.process(sistema.proceso(f'P{i}', random.randint(1, 10)))
+    entorno.run(until=TIEMPO_SIMULACION)
+    return sistema
+
