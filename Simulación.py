@@ -45,3 +45,10 @@ def simular(cantidad_proceso, intervalo):
     entorno.run(until=TIEMPO_SIMULACION)
     return sistema
 
+#Bucle donde se simulan diferentes procesos con diferentes cantidades e intervalos
+for cantidad_procesos in PROCESOS:
+    for intervalo in INTERVALOS:
+        sistema = simular(cantidad_procesos, intervalo)
+        promedio = sum(sistema.tiempos_procesos) / len(sistema.tiempos_procesos)
+        promedio_de_tiempos.append(promedio)
+        print(f'Procesos: {cantidad_procesos}, Intervalo: {intervalo}, Promedio: {promedio}')
