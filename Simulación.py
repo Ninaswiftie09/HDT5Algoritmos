@@ -35,7 +35,7 @@ class Sistema:
                 ver -= 1
             self.tiempos_procesos.append(self.entorno.now - llegada)
 
-            #Hace la simulación  del sistema con cierta cantidad de procesos y un intervalo
+#Hace la simulación  del sistema con cierta cantidad de procesos y un intervalo
 def simular(cantidad_proceso, intervalo):
     random.seed(SEED) 
     entorno = simpy.Environment()
@@ -52,3 +52,13 @@ for cantidad_procesos in PROCESOS:
         promedio = sum(sistema.tiempos_procesos) / len(sistema.tiempos_procesos)
         promedio_de_tiempos.append(promedio)
         print(f'Procesos: {cantidad_procesos}, Intervalo: {intervalo}, Promedio: {promedio}')
+
+#Párametros para la gráfica
+plt.plot(PROCESOS, promedio_de_tiempos[:len(PROCESOS)], label='Intervalo = 10', color='blue')
+plt.plot(PROCESOS, promedio_de_tiempos[len(PROCESOS):2*len(PROCESOS)], label='Intervalo = 5', color='red')
+plt.plot(PROCESOS, promedio_de_tiempos[2*len(PROCESOS):], label='Intervalo = 1', color='purple')
+plt.xlabel('Cantidad de Procesos realizados')
+plt.ylabel('Tiempo Promedio en el que se realizó')
+plt.title('Gráfico Hoja de Trabajo 5')
+plt.legend()
+plt.show()
